@@ -778,7 +778,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     public func statusReminders() -> PermissionStatus {
         let status = EKEventStore.authorizationStatus(for: .reminder)
         switch status {
-        case .authorized:
+		case .authorized, .fullAccess, .writeOnly:
             return .authorized
         case .restricted, .denied:
             return .unauthorized
@@ -815,7 +815,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     public func statusEvents() -> PermissionStatus {
         let status = EKEventStore.authorizationStatus(for: .event)
         switch status {
-        case .authorized:
+		case .authorized, .fullAccess, .writeOnly:
             return .authorized
         case .restricted, .denied:
             return .unauthorized
