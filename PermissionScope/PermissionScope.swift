@@ -413,7 +413,10 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             }
         case .notDetermined:
             return .unknown
-        }
+
+		@unknown default:
+			return .unknown
+		}
     }
 
     /**
@@ -459,6 +462,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             return .unauthorized
         case .notDetermined:
             return .unknown
+		@unknown default:
+			return .unknown
         }
     }
 
@@ -494,13 +499,15 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
         if #available(iOS 9.0, *) {
             let status = CNContactStore.authorizationStatus(for: .contacts)
             switch status {
-            case .authorized:
+			case .authorized, .limited:
                 return .authorized
             case .restricted, .denied:
                 return .unauthorized
             case .notDetermined:
                 return .unknown
-            }
+			@unknown default:
+				return .unknown
+			}
         } else {
             // Fallback on earlier versions
             let status = ABAddressBookGetAuthorizationStatus()
@@ -511,6 +518,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
                 return .unauthorized
             case .notDetermined:
                 return .unknown
+			@unknown default:
+				return .unknown
             }
         }
     }
@@ -707,6 +716,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             return .unauthorized
         case .notDetermined:
             return .unknown
+		@unknown default:
+			return .unknown
         }
     }
     
@@ -746,6 +757,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             return .unauthorized
         case .notDetermined, .limited:
             return .unknown
+		@unknown default:
+			return .unknown
         }
     }
     
@@ -784,6 +797,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             return .unauthorized
         case .notDetermined:
             return .unknown
+		@unknown default:
+			return .unknown
         }
     }
     
@@ -821,6 +836,8 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
             return .unauthorized
         case .notDetermined:
             return .unknown
+		@unknown default:
+			return .unknown
         }
     }
     
